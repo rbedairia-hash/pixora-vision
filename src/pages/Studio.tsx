@@ -45,7 +45,7 @@ export default function StudioPage() {
             </span>
           </div>
           <h1 className="font-grotesk font-bold text-4xl md:text-5xl text-graphite-foreground max-w-2xl mb-4">
-            PIXORA, c'est un studio.<br />
+            PIXORA, c'est un studio.<br className="hidden md:block" />
             <span className="text-primary">Pas une agence.</span>
           </h1>
           <p className="font-inter text-steel max-w-xl leading-relaxed">
@@ -140,7 +140,7 @@ export default function StudioPage() {
               </span>
             </div>
             <h2 className="font-grotesk font-bold text-3xl text-graphite-foreground">
-              Ce que vous pouvez<br />
+              Ce que vous pouvez<br className="hidden md:block" />
               <span className="text-primary">exiger de nous.</span>
             </h2>
           </div>

@@ -8,6 +8,9 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: [
+      "dressy-tonia-yawnful.ngrok-free.dev"
+    ],
     hmr: {
       overlay: false,
     },

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { AlertTriangle, TrendingDown, MousePointer } from "lucide-react";
+import Section from "./Section";
 
 const problems = [
   {
@@ -20,68 +21,74 @@ const problems = [
 ];
 
 // SVG map of Haute-Loire (simplified)
-function HauteLoire() {
+function HauteLoire({ variant }: { variant: "dark" | "light" }) {
   const points = [
-    { x: 120, y: 60, label: "Brioude" },
-    { x: 200, y: 100, label: "Le Puy" },
-    { x: 160, y: 150, label: "Yssingeaux" },
-    { x: 90, y: 120, label: "Langeac" },
-    { x: 230, y: 70, label: "Monistrol" },
-    { x: 180, y: 200, label: "Monastier" },
-    { x: 140, y: 100, label: "Craponne" },
+    { x: 70, y: 80, label: "Brioude", align: "start" as const },
+    { x: 140, y: 45, label: "Craponne", align: "end" as const },
+    { x: 240, y: 55, label: "Monistrol", align: "start" as const },
+    { x: 220, y: 110, label: "Yssingeaux", align: "start" as const },
+    { x: 160, y: 170, label: "Le Puy", align: "start" as const },
+    { x: 80, y: 150, label: "Langeac", align: "start" as const },
+    { x: 190, y: 220, label: "Le Monastier", align: "start" as const },
   ];
 
+  const primaryColor = "72 89% 57%";
+  const accentColor = "72 89% 57%";
+
   return (
-    <svg viewBox="0 0 320 280" className="w-full max-w-sm mx-auto" fill="none">
+    <svg viewBox="0 0 320 280" className="w-full max-w-sm mx-auto group cursor-default transition-transform duration-700 hover:scale-[1.02]" fill="none">
       {/* Map shape */}
       <path
-        d="M80 40 L160 20 L240 50 L270 120 L250 200 L180 240 L100 220 L60 160 L50 100 Z"
-        fill="hsl(221 83% 53% / 0.06)"
-        stroke="hsl(221 83% 53% / 0.3)"
+        d="M 80 40 L 150 25 L 260 35 L 290 90 L 250 160 L 210 240 L 160 270 L 100 240 L 50 180 L 30 110 Z"
+        fill={`hsl(${primaryColor} / 0.05)`}
+        stroke={`hsl(${primaryColor} / 0.25)`}
         strokeWidth="1.5"
+        className="transition-all duration-700 group-hover:fill-[hsl(72_89%_57%_/_0.15)] group-hover:stroke-[hsl(72_89%_57%_/_0.6)]"
       />
       {/* Grid lines */}
-      <line x1="0" y1="140" x2="320" y2="140" stroke="hsl(221 83% 53% / 0.08)" strokeWidth="1" />
-      <line x1="160" y1="0" x2="160" y2="280" stroke="hsl(221 83% 53% / 0.08)" strokeWidth="1" />
+      <line x1="0" y1="140" x2="320" y2="140" stroke={`hsl(${primaryColor} / 0.08)`} strokeWidth="1" />
+      <line x1="160" y1="0" x2="160" y2="280" stroke={`hsl(${primaryColor} / 0.08)`} strokeWidth="1" />
 
-      {/* Connection lines */}
-      {points.map((p, i) =>
-        points.slice(i + 1).map((p2, j) =>
-          Math.abs(p.x - p2.x) + Math.abs(p.y - p2.y) < 120 ? (
-            <line
-              key={`line-${i}-${j}`}
-              x1={p.x} y1={p.y} x2={p2.x} y2={p2.y}
-              stroke="hsl(221 83% 53% / 0.15)"
-              strokeWidth="1"
-            />
-          ) : null
-        )
-      )}
 
       {/* Points */}
-      {points.map((point, i) => (
-        <g key={point.label}>
-          {/* Pulse ring */}
+      {points.map((point) => (
+        <g key={point.label} className="reveal-item opacity-0">
           <circle
             cx={point.x} cy={point.y} r="12"
-            fill="hsl(189 94% 53% / 0.08)"
+            fill={`hsl(${accentColor} / 0.08)`}
             className="animate-pulse-glow"
-            style={{ animationDelay: `${i * 0.4}s` }}
           />
           <circle
             cx={point.x} cy={point.y} r="4"
-            fill="hsl(189 94% 53%)"
+            fill={`hsl(${accentColor})`}
           />
           <circle
             cx={point.x} cy={point.y} r="2"
-            fill="hsl(0 0% 100%)"
+            fill="white"
           />
+          {/* Outline / glow effect for text readability */}
           <text
-            x={point.x + 10}
-            y={point.y + 4}
-            className="text-[10px]"
-            fill="hsl(0 0% 100% / 0.5)"
-            fontSize="9"
+            x={point.align === "end" ? point.x - 10 : point.x + 10}
+            y={point.y + 3}
+            textAnchor={point.align}
+            stroke="white"
+            strokeWidth="2"
+            strokeLinejoin="round"
+            fill="white"
+            fontSize="10"
+            fontFamily="Inter, sans-serif"
+            className="font-medium opacity-50"
+          >
+            {point.label}
+          </text>
+          {/* Actual text */}
+          <text
+            x={point.align === "end" ? point.x - 10 : point.x + 10}
+            y={point.y + 3}
+            textAnchor={point.align}
+            className="font-medium transition-colors duration-500 group-hover:fill-primary"
+            fill={variant === "dark" ? "rgba(255,255,255,0.7)" : "rgba(15,23,42,0.6)"}
+            fontSize="10"
             fontFamily="Inter, sans-serif"
           >
             {point.label}
@@ -90,7 +97,7 @@ function HauteLoire() {
       ))}
 
       {/* Label */}
-      <text x="160" y="265" textAnchor="middle" fill="hsl(0 0% 100% / 0.2)" fontSize="9" fontFamily="JetBrains Mono, monospace">
+      <text x="160" y="15" textAnchor="middle" fill={variant === "dark" ? "rgba(255,255,255,0.7)" : "rgba(15,23,42,0.8)"} fontSize="14" fontWeight="bold" fontFamily="JetBrains Mono, monospace">
         HAUTE-LOIRE · 43
       </text>
     </svg>
@@ -106,8 +113,10 @@ export default function ProblemSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.querySelectorAll(".reveal-item").forEach((el, i) => {
-              (el as HTMLElement).style.animationDelay = `${i * 0.15}s`;
+              (el as HTMLElement).style.animationDelay = `${i * 0.25}s`;
+              (el as HTMLElement).style.animationDuration = `1.2s`;
               el.classList.add("animate-fade-up");
+              el.classList.remove("opacity-0");
             });
           }
         });
@@ -119,76 +128,74 @@ export default function ProblemSection() {
   }, []);
 
   return (
-    <section id="problematique" className="bg-graphite py-24" ref={sectionRef}>
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left — Text */}
-          <div>
-            <div className="flex items-center gap-2 mb-6 reveal-item opacity-0">
-              <div className="h-px w-8 bg-primary" />
-              <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
-                Problématique PME
-              </span>
-            </div>
-            <h2 className="font-grotesk font-bold text-3xl md:text-4xl text-graphite-foreground mb-4 reveal-item opacity-0">
-              Votre image digitale<br />
-              <span className="text-primary">vous coûte des clients.</span>
-            </h2>
-            <p className="font-inter text-steel leading-relaxed mb-10 reveal-item opacity-0">
-              Pour une PME, l'image n'est pas un luxe. C'est le premier filtre que vos prospects utilisent pour décider si vous êtes crédibles.
-            </p>
-
-            <div className="flex flex-col gap-6">
-              {problems.map((problem, i) => {
-                const Icon = problem.icon;
-                return (
-                  <div
-                    key={problem.title}
-                    className="reveal-item opacity-0 flex gap-4 p-5 rounded-lg bg-white/[0.03] border border-white/[0.06] hover-lift"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <Icon size={18} className="text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-grotesk font-semibold text-graphite-foreground mb-1">
-                        {problem.title}
-                      </h3>
-                      <p className="font-inter text-sm text-steel leading-relaxed">
-                        {problem.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+    <Section id="problematique" variant="light" className="reveal">
+      <div ref={sectionRef} className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Left — Text */}
+        <div>
+          <div className="flex items-center gap-2 mb-6 reveal-item opacity-0">
+            <div className="h-px w-8 bg-foreground" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.3em] font-bold">
+              Problématique PME
+            </span>
           </div>
+          <h2 className="reveal-item opacity-0 mb-6 text-foreground leading-tight">
+            Votre image digitale<br className="hidden md:block" />
+            <span className="text-foreground italic">vous coûte des clients.</span>
+          </h2>
+          <p className="reveal-item opacity-0 mb-10 text-muted-foreground max-w-lg text-lg">
+            Pour une PME, l'image n'est pas un luxe. C'est le premier filtre que vos prospects utilisent pour décider si vous êtes crédibles ou non.
+          </p>
 
-          {/* Right — Map */}
-          <div className="reveal-item opacity-0 flex flex-col items-center">
-            <div className="relative w-full max-w-sm mx-auto">
-              <div
-                className="absolute inset-0 rounded-2xl"
-                style={{
-                  background: "radial-gradient(ellipse at center, hsl(221 83% 53% / 0.08), transparent 70%)",
-                }}
-              />
-              <div className="relative p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
-                <HauteLoire />
-                <div className="mt-6 flex items-center justify-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-cyan-accent animate-pulse" />
-                    <span className="font-mono-tech text-[10px] text-steel">Projets actifs</span>
+          <div className="flex flex-col gap-6">
+            {problems.map((problem, i) => {
+              const Icon = problem.icon;
+              return (
+                <div
+                  key={problem.title}
+                  className="reveal-item opacity-0 flex gap-4 p-6 rounded bg-background border border-border shadow-sm hover:-translate-y-1 transition-transform"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded bg-foreground/10 border border-foreground/20 flex items-center justify-center">
+                    <Icon size={20} className="text-foreground" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="font-mono-tech text-[10px] text-steel">Zone couverte</span>
+                  <div>
+                    <h3 className="font-bold text-foreground mb-2 text-lg">
+                      {problem.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {problem.desc}
+                    </p>
                   </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right — Map */}
+        <div className="reveal-item opacity-0 flex flex-col items-center">
+          <div className="relative w-full max-w-md mx-auto">
+            <div
+              className="absolute inset-0 rounded-lg"
+              style={{
+                background: "radial-gradient(ellipse at center, hsl(72 89% 57% / 0.05), transparent 70%)",
+              }}
+            />
+            <div className="relative p-12 rounded-lg border border-border bg-background shadow-sm">
+              <HauteLoire variant="light" />
+              <div className="mt-10 flex items-center justify-center gap-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-foreground/40 animate-pulse" />
+                  <span className="font-mono-tech text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Projets actifs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-foreground" />
+                  <span className="font-mono-tech text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Zone couverte</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { initScrollReveal } from "@/lib/reveal";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -186,26 +187,32 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function ServicesPage() {
+  useEffect(() => {
+    initScrollReveal();
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Page Hero */}
-      <section className="bg-graphite pt-32 pb-20">
+      <section className="bg-graphite pt-32 pb-24 overflow-hidden">
         <div className="container mx-auto px-6">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="h-px w-8 bg-primary" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
-              Services
-            </span>
+          <div className="reveal">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="h-px w-8 bg-primary" />
+              <span className="font-mono-tech text-[11px] uppercase tracking-[0.3em] text-primary font-bold">
+                Expertises PME
+              </span>
+            </div>
+            <h1 className="font-grotesk font-bold text-5xl md:text-7xl text-white tracking-tighter leading-[1.1] mb-8">
+              Prestations sur-mesure.<br className="hidden md:block" />
+              <span className="text-primary italic">Un seul interlocuteur.</span>
+            </h1>
+            <p className="font-inter text-steel text-lg md:text-xl max-w-2xl leading-relaxed">
+              Chaque prestation est pensée pour la réalité économique des PME de Haute-Loire. Pas de packages standardisés — nous construisons votre solution ensemble.
+            </p>
           </div>
-          <h1 className="font-grotesk font-bold text-4xl md:text-5xl text-graphite-foreground max-w-2xl mb-4">
-            Des prestations sur-mesure.<br />
-            <span className="text-primary">Un seul interlocuteur.</span>
-          </h1>
-          <p className="font-inter text-steel max-w-xl leading-relaxed">
-            Chaque prestation est pensée pour les PME de Haute-Loire. Pas de packages standardisés — nous construisons votre solution ensemble.
-          </p>
         </div>
       </section>
 
@@ -272,8 +279,8 @@ export default function ServicesPage() {
                   {/* Deliverables */}
                   <div className="p-6 rounded-xl border border-border bg-card mb-6" style={{ boxShadow: "var(--shadow-md)" }}>
                     <h3 className="font-grotesk font-semibold text-foreground mb-4 flex items-center gap-2">
-                      <span className="w-5 h-5 rounded bg-cyan-accent/10 border border-cyan-accent/20 flex items-center justify-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-accent" />
+                      <span className="w-5 h-5 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </span>
                       Livrables inclus
                     </h3>
@@ -288,7 +295,7 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                     <div className="pt-4 border-t border-border">
-                      <p className="font-inter text-xs text-cyan-accent font-medium">
+                      <p className="font-inter text-xs text-primary font-bold uppercase tracking-wider">
                         → {service.result}
                       </p>
                     </div>

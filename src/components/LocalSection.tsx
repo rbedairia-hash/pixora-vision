@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import hauteLoire from "@/assets/haute-loire.jpg";
 
 export default function LocalSection() {
+  const [counts, setCounts] = useState({ projects: 0, dept: 0, years: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,8 +12,19 @@ export default function LocalSection() {
           if (entry.isIntersecting) {
             entry.target.querySelectorAll(".local-reveal").forEach((el, i) => {
               (el as HTMLElement).style.animationDelay = `${i * 0.15}s`;
-              el.classList.add("animate-fade-up");
+              el.classList.add("active");
             });
+
+            // Start counters
+            const timer = setInterval(() => {
+              setCounts(prev => ({
+                projects: Math.min(prev.projects + 2, 47),
+                dept: 43,
+                years: Math.min(prev.years + 1, 5)
+              }));
+            }, 60);
+
+            return () => clearInterval(timer);
           }
         });
       },
@@ -23,7 +35,7 @@ export default function LocalSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden" ref={sectionRef}>
+    <section className="relative overflow-hidden section-light bg-background text-foreground" ref={sectionRef}>
       {/* Background image */}
       <div
         className="absolute inset-0 z-0"
@@ -34,47 +46,79 @@ export default function LocalSection() {
         }}
       />
       {/* Overlay */}
-      <div className="absolute inset-0 z-0" style={{
-        background: "linear-gradient(90deg, hsl(220 25% 8% / 0.95) 0%, hsl(220 25% 8% / 0.85) 50%, hsl(220 25% 8% / 0.6) 100%)",
-      }} />
-      {/* Color overlay */}
-      <div className="absolute inset-0 z-0" style={{
-        background: "linear-gradient(180deg, hsl(221 83% 53% / 0.05) 0%, transparent 100%)",
+      <div className="absolute inset-0 z-0 bg-white/90" style={{
+        background: "linear-gradient(90deg, hsl(0 0% 100% / 0.98) 0%, hsl(0 0% 100% / 0.90) 50%, hsl(0 0% 100% / 0.7) 100%)",
       }} />
 
       <div className="relative z-10 container mx-auto px-6 py-28">
-        <div className="max-w-xl">
+        <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-6 local-reveal opacity-0">
-            <div className="h-px w-8 bg-cyan-accent" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-cyan-accent/80">
-              Ancrage local
+            <div className="h-px w-8 bg-foreground" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] font-bold">
+              Ancrage Local & Expertise 43
             </span>
           </div>
 
-          <h2 className="font-grotesk font-bold text-3xl md:text-4xl text-graphite-foreground mb-6 local-reveal opacity-0">
-            Un partenaire local.<br />
-            <span className="text-primary">Une vision digitale moderne.</span>
+          <h2 className="font-grotesk font-bold text-4xl md:text-5xl text-foreground mb-8 local-reveal opacity-0 leading-tight">
+            Pourquoi choisir un studio en <br className="hidden md:block" />
+            <span className="text-foreground italic">Haute-Loire ?</span>
           </h2>
 
-          <p className="font-inter text-steel leading-relaxed mb-8 local-reveal opacity-0">
-            Basé en Haute-Loire, nous connaissons le tissu économique local, ses codes et ses enjeux. Nos clients sont des artisans, commerçants et PME — des entreprises réelles, avec des projets concrets.
-          </p>
+          <div className="grid md:grid-cols-2 gap-12 mb-12">
+            <div className="local-reveal opacity-0">
+              <h3 className="font-grotesk font-bold text-xl text-foreground mb-4">Proximité & Réactivité</h3>
+              <p className="font-inter text-muted-foreground text-sm leading-relaxed">
+                Être basé au Puy-en-Velay et rayonner sur toute la Haute-Loire (43) nous permet une réactivité sans faille. On se rencontre, on discute de vive voix, on comprend votre terrain.
+              </p>
+            </div>
+            <div className="local-reveal opacity-0">
+              <h3 className="font-grotesk font-bold text-xl text-foreground mb-4">Connaissance du Territoire</h3>
+              <p className="font-inter text-muted-foreground text-sm leading-relaxed">
+                Nous connaissons le tissu économique altiligérien. Vos enjeux ne sont pas ceux d'une startup parisienne, mais ceux d'une entreprise ancrée dans la réalité de notre région.
+              </p>
+            </div>
+          </div>
 
-          <div className="grid grid-cols-3 gap-6 local-reveal opacity-0">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 local-reveal opacity-0 border-t border-border pt-10">
             {[
-              { number: "47+", label: "Projets réalisés" },
-              { number: "43", label: "Département Haute-Loire" },
-              { number: "5 ans", label: "D'expérience locale" },
-            ].map((stat) => (
-              <div key={stat.label} className="border-t border-white/10 pt-4">
-                <div className="font-grotesk font-bold text-2xl text-primary mb-1">
-                  {stat.number}
-                </div>
-                <div className="font-inter text-xs text-steel">
-                  {stat.label}
-                </div>
+              { number: `${counts.projects}+`, label: "Projets locaux" },
+              { number: `${counts.dept}`, label: "Haute-Loire" },
+              { number: `${counts.years} ans`, label: "Expertise" },
+              { label: "Graphiste 43", isTag: true },
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                {stat.number ? (
+                  <div className="font-grotesk font-bold text-3xl text-foreground mb-1 min-w-[3ch]">
+                    {stat.number}
+                  </div>
+                ) : (
+                  <div className="font-mono-tech text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-3">
+                    {stat.label}
+                  </div>
+                )}
+                {stat.number && (
+                  <div className="font-inter text-xs text-muted-foreground">
+                    {stat.label}
+                  </div>
+                )}
               </div>
             ))}
+          </div>
+
+          {/* Localized SEO Headlines */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 local-reveal opacity-0">
+            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
+              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Graphiste Haute-Loire</h4>
+              <p className="text-xs text-muted-foreground italic">Identité visuelle & branding local.</p>
+            </div>
+            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
+              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Site Internet 43</h4>
+              <p className="text-xs text-muted-foreground italic">Création & refonte Web au Puy.</p>
+            </div>
+            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
+              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Photographe Produit</h4>
+              <p className="text-xs text-muted-foreground italic">Studio packshot en Auvergne.</p>
+            </div>
           </div>
         </div>
       </div>

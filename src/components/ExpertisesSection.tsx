@@ -57,80 +57,80 @@ export default function ExpertisesSection() {
   }, []);
 
   return (
-    <section className="bg-surface py-24" ref={sectionRef}>
+    <section className="bg-surface py-24 reveal-stagger" ref={sectionRef}>
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="max-w-2xl mb-14">
-          <div className="flex items-center gap-2 mb-5 card-reveal opacity-0">
-            <div className="h-px w-8 bg-cyan-accent" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
-              Expertises
+          <div className="flex items-center gap-2 mb-5">
+            <div className="h-px w-8 bg-primary" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-primary">
+              Expertises stratégiques
             </span>
           </div>
-          <h2 className="font-grotesk font-bold text-3xl md:text-4xl text-graphite mb-4 card-reveal opacity-0">
-            Trois expertises.<br />
-            <span className="text-primary">Un studio.</span> Des résultats.
+          <h2 className="font-grotesk font-bold text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+            Accélérer votre business.<br className="hidden md:block" />
+            <span className="text-primary italic">Une expertise à la fois.</span>
           </h2>
-          <p className="font-inter text-steel leading-relaxed card-reveal opacity-0">
-            Chaque prestation est conçue pour répondre à un objectif business précis — pas à une tendance graphique.
+          <p className="font-inter text-steel text-lg leading-relaxed">
+            Pas de fioritures, juste des prestations pensées pour un retour sur investissement concret pour votre entreprise en Haute-Loire.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {expertises.map((expertise) => {
             const Icon = expertise.icon;
             return (
               <div
                 key={expertise.title}
-                className="card-reveal opacity-0 card-accent group p-7 rounded-xl bg-card border border-border flex flex-col"
+                className="group p-8 rounded bg-card border border-border flex flex-col hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
                 style={{ boxShadow: "var(--shadow-sm)" }}
               >
                 {/* Number + Icon */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/8 border border-primary/15 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
-                    <Icon size={22} className="text-primary" />
+                <div className="flex items-start justify-between mb-8">
+                  <div className="w-14 h-14 rounded bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                    <Icon size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
-                  <span className="font-mono-tech text-xs text-steel/30 font-medium">
+                  <span className="font-mono-tech text-xs text-steel/20 font-bold tracking-widest">
                     {expertise.number}
                   </span>
                 </div>
 
                 {/* Content */}
-                <h3 className="font-grotesk font-bold text-xl text-graphite mb-1">
+                <h3 className="font-grotesk font-bold text-2xl text-foreground mb-2">
                   {expertise.title}
                 </h3>
-                <p className="font-inter text-xs font-medium text-cyan-accent mb-4 uppercase tracking-wide">
+                <p className="font-inter text-[10px] font-bold text-primary mb-6 uppercase tracking-[0.2em]">
                   {expertise.tagline}
                 </p>
-                <p className="font-inter text-sm text-steel leading-relaxed mb-5">
+                <p className="font-inter text-sm text-steel leading-relaxed mb-8">
                   {expertise.objective}
                 </p>
 
                 {/* Deliverables */}
-                <ul className="flex flex-col gap-2 mb-6 flex-1">
+                <ul className="flex flex-col gap-3 mb-8 flex-1">
                   {expertise.deliverables.map((d) => (
-                    <li key={d} className="flex items-center gap-2 text-sm text-graphite/70">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-accent flex-shrink-0" />
+                    <li key={d} className="flex items-center gap-3 text-sm text-foreground/70">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                       {d}
                     </li>
                   ))}
                 </ul>
 
                 {/* Result */}
-                <div className="p-3 rounded-md bg-surface border border-primary/10 mb-5">
-                  <p className="font-inter text-xs text-primary font-medium">
-                    → {expertise.result}
+                <div className="p-4 rounded-xl bg-surface border border-primary/5 mb-8">
+                  <p className="font-inter text-xs text-primary font-semibold">
+                    Objectif : {expertise.result}
                   </p>
                 </div>
 
                 {/* CTA */}
                 <Link
                   to={expertise.href}
-                  className="flex items-center gap-2 text-sm font-grotesk font-medium text-primary hover:text-cyan-accent transition-colors group/link"
+                  className="flex items-center gap-2 text-sm font-grotesk font-bold text-foreground hover:text-primary transition-colors group/link"
                 >
-                  En savoir plus
-                  <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                  Découvrir la prestation
+                  <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
             );

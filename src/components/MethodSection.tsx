@@ -52,29 +52,29 @@ export default function MethodSection() {
   }, []);
 
   return (
-    <section className="bg-graphite py-24" ref={sectionRef}>
+    <section className="bg-background text-foreground section-light py-24" ref={sectionRef}>
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="max-w-xl mb-16">
           <div className="flex items-center gap-2 mb-5">
-            <div className="h-px w-8 bg-primary" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
+            <div className="h-px w-8 bg-foreground" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] font-bold">
               Méthode
             </span>
           </div>
-          <h2 className="font-grotesk font-bold text-3xl md:text-4xl text-graphite-foreground">
-            Un process structuré.<br />
-            <span className="text-primary">Aucune surprise.</span>
+          <h2 className="font-grotesk font-bold text-3xl md:text-4xl text-foreground">
+            Un process structuré.<br className="hidden md:block" />
+            <span className="text-foreground italic">Aucune surprise.</span>
           </h2>
         </div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Line */}
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-white/[0.06]">
+          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-border">
             <div
               ref={lineRef}
-              className="h-full bg-gradient-to-r from-primary to-cyan-accent"
+              className="h-full bg-foreground"
               style={{ width: "0%" }}
             />
           </div>
@@ -89,22 +89,22 @@ export default function MethodSection() {
                 {/* Number circle */}
                 <div className="flex items-center gap-3 mb-5">
                   <div
-                    className="relative z-10 w-16 h-16 rounded-full border-2 border-primary/40 bg-graphite flex items-center justify-center flex-shrink-0"
+                    className="relative z-10 w-16 h-16 rounded-full border-2 border-foreground/20 bg-background flex items-center justify-center flex-shrink-0"
                     style={{
-                      boxShadow: i === 0 ? "var(--shadow-blue)" : "none",
-                      borderColor: i === 0 ? "hsl(var(--primary))" : undefined,
+                      boxShadow: i === 0 ? "0 4px 12px hsl(var(--foreground)/0.10)" : "none",
+                      borderColor: i === 0 ? "hsl(var(--foreground)/0.4)" : undefined,
                     }}
                   >
-                    <span className="font-mono-tech font-medium text-sm text-primary">
+                    <span className="font-mono-tech font-bold text-sm text-foreground">
                       {step.number}
                     </span>
                     {i === 0 && (
-                      <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping opacity-20" />
+                      <div className="absolute inset-0 rounded-full border border-foreground/20 animate-ping opacity-20" />
                     )}
                   </div>
                 </div>
 
-                <h3 className="font-grotesk font-bold text-lg text-graphite-foreground mb-3">
+                <h3 className="font-grotesk font-bold text-lg text-foreground mb-3">
                   {step.title}
                 </h3>
                 <p className="font-inter text-sm text-steel leading-relaxed">
@@ -113,7 +113,7 @@ export default function MethodSection() {
 
                 {/* Connector on mobile */}
                 {i < steps.length - 1 && (
-                  <div className="md:hidden mt-6 ml-8 h-6 w-px bg-white/10" />
+                  <div className="md:hidden mt-6 ml-8 h-6 w-px bg-border" />
                 )}
               </div>
             ))}

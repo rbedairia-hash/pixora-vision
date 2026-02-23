@@ -3,6 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { ExternalLink } from "lucide-react";
+import pmvChamara from "@/assets/pmv-chamara.jpg";
+
 
 const categories = ["Tous", "Identité", "Web", "Photographie", "Stratégie"];
 
@@ -87,37 +89,51 @@ export default function RealisationsPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-graphite pt-32 pb-20">
+      <section className="bg-background text-foreground section-dark pt-32 pb-20">
         <div className="container mx-auto px-6">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="h-px w-8 bg-cyan-accent" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
-              Réalisations
-            </span>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left — Text */}
+            <div>
+              <div className="flex items-center gap-2 mb-6">
+                <div className="h-px w-8 bg-primary" />
+                <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
+                  Réalisations
+                </span>
+              </div>
+              <h1 className="font-grotesk font-bold text-4xl md:text-6xl text-foreground tracking-tight leading-tight mb-6">
+                Nos projets.<br className="hidden md:block" />
+                <span className="text-primary italic">Leurs résultats.</span>
+              </h1>
+              <p className="font-inter text-muted-foreground text-lg max-w-xl leading-relaxed">
+                Chaque projet est une collaboration. Voici quelques exemples concrets de ce que nous avons construit ensemble.
+              </p>
+            </div>
+
+            {/* Right — Image */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/0 rounded blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+              <img
+                src={pmvChamara}
+                alt="Projet PMV Chamara – réalisation PIXORA"
+                className="relative w-full h-auto rounded shadow-sm object-cover ring-1 ring-border"
+              />
+            </div>
           </div>
-          <h1 className="font-grotesk font-bold text-4xl md:text-5xl text-graphite-foreground max-w-2xl mb-4">
-            Nos projets.<br />
-            <span className="text-cyan-accent">Leurs résultats.</span>
-          </h1>
-          <p className="font-inter text-steel max-w-xl leading-relaxed">
-            Chaque projet est une collaboration. Voici quelques exemples concrets de ce que nous avons construit ensemble.
-          </p>
         </div>
       </section>
 
       {/* Filter */}
-      <section className="py-8 border-b border-border bg-surface sticky top-16 z-40">
+      <section className="py-8 border-b border-border bg-background sticky top-16 z-40">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`font-grotesk text-sm font-medium px-4 py-2 rounded-md transition-all duration-200 ${
-                  activeCategory === cat
-                    ? "bg-primary text-primary-foreground shadow-blue"
-                    : "bg-card border border-border text-steel hover:border-primary/40 hover:text-primary"
-                }`}
+                className={`font-grotesk text-sm font-medium px-4 py-2 rounded transition-all duration-200 ${activeCategory === cat
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-card border border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
+                  }`}
               >
                 {cat}
               </button>
@@ -133,19 +149,19 @@ export default function RealisationsPage() {
             {filtered.map((project) => (
               <div
                 key={project.title}
-                className="group rounded-xl border border-border bg-card overflow-hidden hover-lift"
+                className="group rounded border border-border bg-card overflow-hidden hover:-translate-y-1 transition-transform"
                 style={{ boxShadow: "var(--shadow-sm)" }}
               >
                 {/* Visual */}
                 <div className={`h-48 bg-gradient-to-br ${project.color} relative`}>
-                  <div className="absolute inset-0 bg-graphite/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <button className="font-grotesk font-semibold text-sm text-graphite-foreground border border-white/20 rounded-md px-4 py-2.5 flex items-center gap-2 hover:border-white/50 transition-colors">
+                  <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                    <button className="font-grotesk font-semibold text-sm text-foreground border border-border rounded px-4 py-2.5 flex items-center gap-2 hover:border-primary/50 transition-colors">
                       Voir le détail <ExternalLink size={13} />
                     </button>
                   </div>
                   <div className="absolute bottom-4 left-4 flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="font-mono-tech text-[9px] uppercase tracking-wider text-graphite-foreground/80 bg-graphite/50 backdrop-blur-sm border border-white/10 rounded px-2 py-1">
+                      <span key={tag} className="font-mono-tech text-[9px] uppercase tracking-wider text-foreground/80 bg-background/50 backdrop-blur-sm border border-border rounded px-2 py-1">
                         {tag}
                       </span>
                     ))}
@@ -180,7 +196,7 @@ export default function RealisationsPage() {
 
                   {/* Result */}
                   <div className="pt-3 border-t border-border flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-accent flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                     <span className="font-grotesk font-semibold text-xs text-primary">
                       {project.result}
                     </span>

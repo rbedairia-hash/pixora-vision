@@ -69,14 +69,14 @@ export default function BlogPage() {
       <section className="bg-graphite pt-32 pb-20">
         <div className="container mx-auto px-6">
           <div className="flex items-center gap-2 mb-6">
-            <div className="h-px w-8 bg-cyan-accent" />
+            <div className="h-px w-8 bg-primary" />
             <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-steel">
               Blog
             </span>
           </div>
           <h1 className="font-grotesk font-bold text-4xl md:text-5xl text-graphite-foreground max-w-2xl mb-4">
-            Ressources & conseils<br />
-            <span className="text-cyan-accent">pour les PME.</span>
+            Ressources & conseils<br className="hidden md:block" />
+            <span className="text-primary">pour les PME.</span>
           </h1>
           <p className="font-inter text-steel max-w-xl leading-relaxed">
             Des articles pratiques sur le digital, le graphisme et la stratégie — sans jargon. Écrits pour les entrepreneurs de Haute-Loire.
@@ -106,10 +106,9 @@ export default function BlogPage() {
                 <p className="font-inter text-sm text-steel leading-relaxed mb-5">
                   {articles[0].excerpt}
                 </p>
-                {/* Callout */}
-                <div className="p-3 rounded-md border-l-2 border-cyan-accent bg-cyan/5 mb-5">
+                <div className="p-3 rounded-md border-l-2 border-primary bg-primary/5 mb-5">
                   <p className="font-inter text-xs text-foreground/70">
-                    <span className="font-semibold text-cyan-accent">💡 Conseil pratique :</span>{" "}
+                    <span className="font-semibold text-primary">💡 Conseil pratique :</span>{" "}
                     Testez votre site sur PageSpeed Insights aujourd'hui. Si votre score est sous 70, chaque seconde supplémentaire vous coûte des clients.
                   </p>
                 </div>
@@ -118,7 +117,7 @@ export default function BlogPage() {
                     <Clock size={12} />
                     <span className="font-inter text-xs">{articles[0].readTime} min de lecture</span>
                   </div>
-                  <button className="font-grotesk font-medium text-sm text-primary hover:text-cyan-accent transition-colors flex items-center gap-1.5 group">
+                  <button className="font-grotesk font-medium text-sm text-primary hover:text-primary transition-colors flex items-center gap-1.5 group">
                     Lire l'article
                     <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -158,7 +157,7 @@ export default function BlogPage() {
                       <Clock size={11} />
                       <span className="font-inter text-xs">{article.readTime} min</span>
                     </div>
-                    <button className="font-grotesk text-xs font-medium text-primary hover:text-cyan-accent transition-colors flex items-center gap-1 group">
+                    <button className="font-grotesk text-xs font-medium text-primary hover:text-primary transition-colors flex items-center gap-1 group">
                       Lire
                       <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>

@@ -33,13 +33,13 @@ export default function HeroSection() {
       />
       {/* Overlay gradient */}
       <div className="absolute inset-0 z-0" style={{
-        background: "linear-gradient(180deg, hsl(220 25% 8% / 0.7) 0%, hsl(220 25% 8% / 0.85) 60%, hsl(220 25% 8%) 100%)",
+        background: "linear-gradient(180deg, hsl(30 5% 8% / 0.7) 0%, hsl(30 5% 8% / 0.85) 60%, hsl(30 5% 8%) 100%)",
       }} />
       {/* Radial glow */}
       <div
         className="absolute inset-0 z-0 animate-pulse-glow"
         style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 30%, hsl(221 83% 53% / 0.12), transparent 70%)",
+          background: "radial-gradient(ellipse 60% 50% at 50% 30%, hsl(72 89% 57% / 0.05), transparent 70%)",
         }}
       />
 
@@ -48,23 +48,22 @@ export default function HeroSection() {
         <div className="max-w-4xl">
           {/* Tag */}
           <div className="flex items-center gap-2 mb-8 opacity-0 animate-fade-up" style={{ animationDelay: "0.05s", animationFillMode: "forwards" }}>
-            <div className="h-px w-8 bg-cyan-accent" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.25em] text-cyan-accent">
-              Studio image & digital · Haute-Loire
+            <div className="h-px w-8 bg-primary" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.3em] text-primary font-bold">
+              Studio créatif en Haute-Loire · 43
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="font-grotesk font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-graphite-foreground mb-6">
+          <h1 className="font-grotesk font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-white tracking-tighter mb-8">
             {words.map((word, i) => (
               <span
                 key={i}
                 ref={(el) => { if (el) wordsRef.current[i] = el; }}
-                className="inline-block mr-[0.25em] word-animate"
-                style={{ animationDelay: `${0.1 + i * 0.12}s` }}
+                className="inline-block mr-[0.2em] word-animate"
               >
                 {word === "image" ? (
-                  <span className="text-cyan-accent">{word}</span>
+                  <span className="text-primary italic">{word}</span>
                 ) : (
                   word
                 )}
@@ -91,16 +90,16 @@ export default function HeroSection() {
           >
             <Link
               to="/contact"
-              className="btn-animated group font-grotesk font-semibold px-7 py-4 rounded-md bg-primary text-primary-foreground shadow-blue flex items-center gap-2 hover:bg-primary/90 transition-all duration-200"
+              className="btn-animated group font-grotesk font-semibold px-8 py-4 rounded bg-primary text-primary-foreground flex items-center gap-2 hover:bg-secondary transition-all duration-200"
             >
               Obtenir un devis structuré
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/realisations"
-              className="font-grotesk font-medium px-7 py-4 rounded-md border border-white/20 text-graphite-foreground hover:border-cyan-accent/50 hover:text-cyan-accent transition-all duration-200"
+              className="font-grotesk font-bold px-8 py-4 rounded border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
             >
-              Découvrir nos réalisations
+              Voir nos réalisations
             </Link>
           </div>
 
@@ -129,10 +128,10 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <a
         href="#problematique"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-steel/40 hover:text-cyan-accent transition-colors group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-steel/40 hover:text-primary transition-colors group"
       >
         <span className="font-mono-tech text-[10px] uppercase tracking-widest">Scroll</span>
-        <ChevronDown size={16} className="animate-bounce" />
+        <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform duration-300" />
       </a>
     </section>
   );
