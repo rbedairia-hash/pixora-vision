@@ -15,7 +15,6 @@ export default function LocalSection() {
               el.classList.add("active");
             });
 
-            // Start counters
             const timer = setInterval(() => {
               setCounts(prev => ({
                 projects: Math.min(prev.projects + 2, 47),
@@ -36,25 +35,26 @@ export default function LocalSection() {
 
   return (
     <section className="relative overflow-hidden section-light bg-background text-foreground" ref={sectionRef}>
-      {/* Background image */}
+      {/* Background image — darkened & cold-tinted */}
       <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${hauteLoire})`,
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
+          filter: "brightness(0.7) saturate(0.6)",
         }}
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 z-0 bg-white/90" style={{
-        background: "linear-gradient(90deg, hsl(0 0% 100% / 0.98) 0%, hsl(0 0% 100% / 0.90) 50%, hsl(0 0% 100% / 0.7) 100%)",
+      {/* Cold overlay */}
+      <div className="absolute inset-0 z-0" style={{
+        background: "linear-gradient(90deg, hsl(220 20% 97% / 0.96) 0%, hsl(220 20% 97% / 0.88) 50%, hsl(220 20% 97% / 0.65) 100%)",
       }} />
 
       <div className="relative z-10 container mx-auto px-6 py-28">
         <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-6 local-reveal opacity-0">
-            <div className="h-px w-8 bg-foreground" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] font-bold">
+            <div className="h-px w-8 bg-primary" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-primary font-bold">
               Ancrage Local & Expertise 43
             </span>
           </div>
@@ -88,37 +88,27 @@ export default function LocalSection() {
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
                 {stat.number ? (
-                  <div className="font-grotesk font-bold text-3xl text-foreground mb-1 min-w-[3ch]">
-                    {stat.number}
-                  </div>
+                  <div className="font-grotesk font-bold text-3xl text-foreground mb-1 min-w-[3ch]">{stat.number}</div>
                 ) : (
-                  <div className="font-mono-tech text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-3">
-                    {stat.label}
-                  </div>
+                  <div className="font-mono-tech text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-3">{stat.label}</div>
                 )}
-                {stat.number && (
-                  <div className="font-inter text-xs text-muted-foreground">
-                    {stat.label}
-                  </div>
-                )}
+                {stat.number && <div className="font-inter text-xs text-muted-foreground">{stat.label}</div>}
               </div>
             ))}
           </div>
 
-          {/* Localized SEO Headlines */}
+          {/* SEO cards */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 local-reveal opacity-0">
-            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
-              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Graphiste Haute-Loire</h4>
-              <p className="text-xs text-muted-foreground italic">Identité visuelle & branding local.</p>
-            </div>
-            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
-              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Site Internet 43</h4>
-              <p className="text-xs text-muted-foreground italic">Création & refonte Web au Puy.</p>
-            </div>
-            <div className="p-6 rounded border border-border bg-card shadow-sm hover:-translate-y-1 transition-transform">
-              <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">Photographe Produit</h4>
-              <p className="text-xs text-muted-foreground italic">Studio packshot en Auvergne.</p>
-            </div>
+            {[
+              { title: "Graphiste Haute-Loire", desc: "Identité visuelle & branding local." },
+              { title: "Site Internet 43", desc: "Création & refonte Web au Puy." },
+              { title: "Photographe Produit", desc: "Studio packshot en Auvergne." },
+            ].map((card) => (
+              <div key={card.title} className="p-6 rounded border border-border bg-card hover:-translate-y-1 transition-all duration-350" style={{ boxShadow: "0 2px 12px hsl(217 91% 53% / 0.04)" }}>
+                <h4 className="font-grotesk font-bold text-lg text-foreground mb-2">{card.title}</h4>
+                <p className="text-xs text-muted-foreground italic">{card.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
