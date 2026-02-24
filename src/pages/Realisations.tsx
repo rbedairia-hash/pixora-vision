@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { ExternalLink } from "lucide-react";
-import pmvChamara from "@/assets/pmv-chamara.jpg";
+import heroStudio from "@/assets/hero-studio.jpg";
 
 
 const categories = ["Tous", "Identité", "Web", "Photographie", "Stratégie"];
@@ -113,8 +113,8 @@ export default function RealisationsPage() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/0 rounded blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
               <img
-                src={pmvChamara}
-                alt="Projet PMV Chamara – réalisation PIXORA"
+                src={heroStudio}
+                alt="Réalisations PIXORA – Studio image & digital"
                 className="relative w-full h-auto rounded shadow-sm object-cover ring-1 ring-border"
               />
             </div>
