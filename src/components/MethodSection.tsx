@@ -32,12 +32,10 @@ export default function MethodSection() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate steps
             entry.target.querySelectorAll(".step-item").forEach((el, i) => {
               (el as HTMLElement).style.animationDelay = `${0.2 + i * 0.2}s`;
               el.classList.add("animate-fade-up");
             });
-            // Animate line
             if (lineRef.current) {
               lineRef.current.style.transition = "width 1.2s ease 0.3s";
               lineRef.current.style.width = "100%";
@@ -57,8 +55,8 @@ export default function MethodSection() {
         {/* Header */}
         <div className="max-w-xl mb-16">
           <div className="flex items-center gap-2 mb-5">
-            <div className="h-px w-8 bg-foreground" />
-            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] font-bold">
+            <div className="h-px w-8 bg-primary" />
+            <span className="font-mono-tech text-xs uppercase tracking-[0.2em] text-primary font-bold">
               Méthode
             </span>
           </div>
@@ -70,48 +68,31 @@ export default function MethodSection() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Line */}
           <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-border">
-            <div
-              ref={lineRef}
-              className="h-full bg-foreground"
-              style={{ width: "0%" }}
-            />
+            <div ref={lineRef} className="h-full bg-primary" style={{ width: "0%" }} />
           </div>
 
-          {/* Steps */}
           <div className="grid md:grid-cols-4 gap-8 md:gap-6">
             {steps.map((step, i) => (
-              <div
-                key={step.number}
-                className="step-item opacity-0 relative flex flex-col"
-              >
-                {/* Number circle */}
+              <div key={step.number} className="step-item opacity-0 relative flex flex-col">
                 <div className="flex items-center gap-3 mb-5">
                   <div
-                    className="relative z-10 w-16 h-16 rounded-full border-2 border-foreground/20 bg-background flex items-center justify-center flex-shrink-0"
+                    className="relative z-10 w-16 h-16 rounded-full border-2 border-border bg-background flex items-center justify-center flex-shrink-0"
                     style={{
-                      boxShadow: i === 0 ? "0 4px 12px hsl(var(--foreground)/0.10)" : "none",
-                      borderColor: i === 0 ? "hsl(var(--foreground)/0.4)" : undefined,
+                      borderColor: i === 0 ? "hsl(217 91% 53% / 0.5)" : undefined,
+                      boxShadow: i === 0 ? "0 4px 16px hsl(217 91% 53% / 0.1)" : "none",
                     }}
                   >
-                    <span className="font-mono-tech font-bold text-sm text-foreground">
-                      {step.number}
-                    </span>
+                    <span className="font-mono-tech font-bold text-sm text-foreground">{step.number}</span>
                     {i === 0 && (
-                      <div className="absolute inset-0 rounded-full border border-foreground/20 animate-ping opacity-20" />
+                      <div className="absolute inset-0 rounded-full border border-primary/30 animate-ping opacity-20" />
                     )}
                   </div>
                 </div>
 
-                <h3 className="font-grotesk font-bold text-lg text-foreground mb-3">
-                  {step.title}
-                </h3>
-                <p className="font-inter text-sm text-steel leading-relaxed">
-                  {step.desc}
-                </p>
+                <h3 className="font-grotesk font-bold text-lg text-foreground mb-3">{step.title}</h3>
+                <p className="font-inter text-sm text-steel leading-relaxed">{step.desc}</p>
 
-                {/* Connector on mobile */}
                 {i < steps.length - 1 && (
                   <div className="md:hidden mt-6 ml-8 h-6 w-px bg-border" />
                 )}

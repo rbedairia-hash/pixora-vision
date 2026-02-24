@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroStudio from "@/assets/hero-studio.jpg";
 
 const words = ["Votre", "image", "mérite", "mieux", "qu'un", "simple", "prestataire."];
 
@@ -22,24 +22,44 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden grain">
-      {/* Background */}
+      {/* Deep background */}
+      <div className="absolute inset-0 z-0" style={{
+        background: "linear-gradient(135deg, hsl(240 10% 6%) 0%, hsl(220 40% 12%) 40%, hsl(240 10% 6%) 100%)",
+      }} />
+
+      {/* Studio image — right side, asymmetric */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="absolute top-0 right-0 bottom-0 w-full lg:w-[60%]"
+          style={{
+            backgroundImage: `url(${heroStudio})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        {/* Gradient mask left */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(90deg, hsl(240 10% 6%) 0%, hsl(240 10% 6%) 30%, hsl(240 10% 6% / 0.85) 50%, hsl(240 10% 6% / 0.4) 75%, hsl(240 10% 6% / 0.2) 100%)",
+        }} />
+        {/* Gradient mask bottom */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(180deg, hsl(240 10% 6% / 0.3) 0%, hsl(240 10% 6% / 0.1) 50%, hsl(240 10% 6% / 0.9) 90%, hsl(240 10% 6%) 100%)",
+        }} />
+      </div>
+
+      {/* Directional light — blue */}
+      <div
+        className="absolute inset-0 z-0 animate-breathing"
+        style={{
+          background: "radial-gradient(ellipse 50% 70% at 20% 40%, hsl(217 91% 53% / 0.06), transparent 70%)",
+        }}
+      />
+
+      {/* Subtle cyan accent glow */}
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 z-0" style={{
-        background: "linear-gradient(180deg, hsl(30 5% 8% / 0.7) 0%, hsl(30 5% 8% / 0.85) 60%, hsl(30 5% 8%) 100%)",
-      }} />
-      {/* Radial glow */}
-      <div
-        className="absolute inset-0 z-0 animate-pulse-glow"
-        style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 30%, hsl(72 89% 57% / 0.05), transparent 70%)",
+          background: "radial-gradient(ellipse 30% 40% at 70% 30%, hsl(189 94% 53% / 0.03), transparent 60%)",
         }}
       />
 
@@ -55,7 +75,7 @@ export default function HeroSection() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-grotesk font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-white tracking-tighter mb-8">
+          <h1 className="font-grotesk font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-foreground tracking-tighter mb-8">
             {words.map((word, i) => (
               <span
                 key={i}
@@ -78,9 +98,9 @@ export default function HeroSection() {
             style={{ animationDelay: "1.1s", animationFillMode: "forwards" }}
           >
             Studio graphique & web pour PME en Haute-Loire.{" "}
-            <span className="text-graphite-foreground/80">Identité.</span>{" "}
-            <span className="text-graphite-foreground/80">Site internet.</span>{" "}
-            <span className="text-graphite-foreground/80">Photographie produit.</span>
+            <span className="text-foreground/70">Identité.</span>{" "}
+            <span className="text-foreground/70">Site internet.</span>{" "}
+            <span className="text-foreground/70">Photographie produit.</span>
           </p>
 
           {/* CTAs */}
@@ -90,14 +110,14 @@ export default function HeroSection() {
           >
             <Link
               to="/contact"
-              className="btn-animated group font-grotesk font-semibold px-8 py-4 rounded bg-primary text-primary-foreground flex items-center gap-2 hover:bg-secondary transition-all duration-200"
+              className="btn-animated group font-grotesk font-semibold px-8 py-4 rounded bg-primary text-primary-foreground flex items-center gap-2 transition-all duration-300"
             >
               Obtenir un devis structuré
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/realisations"
-              className="font-grotesk font-bold px-8 py-4 rounded border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+              className="font-grotesk font-bold px-8 py-4 rounded border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               Voir nos réalisations
             </Link>

@@ -57,7 +57,7 @@ export default function ExpertisesSection() {
   }, []);
 
   return (
-    <section className="bg-surface py-24 reveal-stagger" ref={sectionRef}>
+    <section className="bg-background text-foreground section-dark py-24 reveal-stagger" ref={sectionRef}>
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="max-w-2xl mb-14">
@@ -83,12 +83,11 @@ export default function ExpertisesSection() {
             return (
               <div
                 key={expertise.title}
-                className="group p-8 rounded bg-card border border-border flex flex-col hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-                style={{ boxShadow: "var(--shadow-sm)" }}
+                className="group p-8 rounded bg-card border border-border flex flex-col hover:border-primary/40 transition-all duration-350 card-accent"
               >
                 {/* Number + Icon */}
                 <div className="flex items-start justify-between mb-8">
-                  <div className="w-14 h-14 rounded bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                  <div className="w-14 h-14 rounded bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary transition-all duration-350">
                     <Icon size={24} className="text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
                   <span className="font-mono-tech text-xs text-steel/20 font-bold tracking-widest">
@@ -118,7 +117,7 @@ export default function ExpertisesSection() {
                 </ul>
 
                 {/* Result */}
-                <div className="p-4 rounded-xl bg-surface border border-primary/5 mb-8">
+                <div className="p-4 rounded-xl bg-muted border border-primary/10 mb-8">
                   <p className="font-inter text-xs text-primary font-semibold">
                     Objectif : {expertise.result}
                   </p>

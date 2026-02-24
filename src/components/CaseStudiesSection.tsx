@@ -10,7 +10,7 @@ const cases = [
     problem: "Zéro visibilité en ligne, dépendance totale au bouche-à-oreille.",
     solution: "Identité visuelle premium + site vitrine SEO-optimisé.",
     impact: "+340% de contacts entrants en 6 mois",
-    color: "from-primary/20 to-cyan/10",
+    color: "from-primary/20 to-accent/10",
     tag: "Artisanat",
   },
   {
@@ -20,7 +20,7 @@ const cases = [
     problem: "Site de 2012, non-mobile, taux de rebond > 85%.",
     solution: "Refonte complète + shooting véhicules + stratégie Google.",
     impact: "Taux de rebond : 85% → 38%",
-    color: "from-cyan/20 to-primary/10",
+    color: "from-accent/15 to-primary/10",
     tag: "Automobile",
   },
   {
@@ -84,17 +84,16 @@ export default function CaseStudiesSection() {
 
         {/* Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
-          {cases.map((c, i) => (
+          {cases.map((c) => (
             <div
               key={c.title}
-              className={`case-item opacity-0 group relative rounded border border-border bg-card overflow-hidden hover:border-primary/50 transition-all duration-300 hover:-translate-y-1`}
-              style={{ boxShadow: "var(--shadow-sm)" }}
+              className="case-item opacity-0 group relative rounded border border-border bg-card overflow-hidden hover:border-primary/40 transition-all duration-350 hover:-translate-y-1"
+              style={{ boxShadow: "0 2px 16px hsl(217 91% 53% / 0.04)" }}
             >
-              {/* Visual header - Represents Mockups */}
+              {/* Visual header */}
               <div className={`h-56 bg-gradient-to-br ${c.color} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700`}>
-                {/* Decorative mockup elements */}
-                <div className="absolute inset-x-4 top-4 h-full bg-white/5 rounded-t-xl border border-white/10 transform rotate-1 group-hover:rotate-0 transition-transform duration-500 shadow-2xl" />
-                <div className="absolute inset-x-8 top-8 h-full bg-white/10 rounded-t-xl border border-white/10 transform -rotate-1 group-hover:rotate-0 transition-transform duration-500 shadow-2xl delay-75" />
+                <div className="absolute inset-x-4 top-4 h-full bg-foreground/5 rounded-t-xl border border-foreground/10 transform rotate-1 group-hover:rotate-0 transition-transform duration-500" />
+                <div className="absolute inset-x-8 top-8 h-full bg-foreground/10 rounded-t-xl border border-foreground/10 transform -rotate-1 group-hover:rotate-0 transition-transform duration-500 delay-75" />
 
                 <div className="absolute inset-0 flex items-center justify-center p-8 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="text-center">
@@ -108,28 +107,21 @@ export default function CaseStudiesSection() {
                     {c.tag}
                   </span>
                 </div>
-
-                {/* Visual Overlay */}
-                <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
               </div>
 
               {/* Content */}
               <div className="p-8">
                 <div className="mb-6">
-                  <h3 className="font-grotesk font-bold text-2xl text-foreground mb-1">
-                    {c.title}
-                  </h3>
-                  <p className="font-mono-tech text-[10px] text-primary uppercase tracking-[0.2em] font-bold">
-                    {c.category}
-                  </p>
+                  <h3 className="font-grotesk font-bold text-2xl text-foreground mb-1">{c.title}</h3>
+                  <p className="font-mono-tech text-[10px] text-primary uppercase tracking-[0.2em] font-bold">{c.category}</p>
                 </div>
 
                 <div className="space-y-4 mb-8">
                   <p className="font-inter text-sm text-steel leading-relaxed">
-                    <strong className="text-white/60 font-medium mr-2">Défi :</strong> {c.problem}
+                    <strong className="text-foreground/50 font-medium mr-2">Défi :</strong> {c.problem}
                   </p>
                   <p className="font-inter text-sm text-steel leading-relaxed">
-                    <strong className="text-white/60 font-medium mr-2">Impact :</strong> <span className="text-primary font-bold">{c.impact}</span>
+                    <strong className="text-foreground/50 font-medium mr-2">Impact :</strong> <span className="text-primary font-bold">{c.impact}</span>
                   </p>
                 </div>
 

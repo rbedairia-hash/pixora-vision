@@ -58,16 +58,13 @@ export default {
         },
         surface: {
           DEFAULT: "hsl(var(--surface))",
-          foreground: "hsl(var(--surface-foreground))",
         },
         cyan: {
           DEFAULT: "hsl(var(--cyan))",
-          foreground: "hsl(var(--cyan-foreground))",
           accent: "hsl(var(--cyan))",
         },
         steel: {
           DEFAULT: "hsl(var(--steel))",
-          foreground: "hsl(var(--steel-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

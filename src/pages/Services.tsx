@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { initScrollReveal } from "@/lib/reveal";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -188,7 +187,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function ServicesPage() {
   useEffect(() => {
-    initScrollReveal();
+    // Scroll reveal handled by individual sections
   }, []);
 
   return (
